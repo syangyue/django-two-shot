@@ -5,5 +5,5 @@ from .views import (
 )
 
 urlpatterns = [
-    path("", ReceiptListView.as_view(), name="receipt_list")
+    path("", ReceiptListView.as_view(), name="home")
 ]
