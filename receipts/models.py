@@ -17,7 +17,7 @@ class ExpenseCategory(models.Model):
 
 class Account(models.Model):
     name = models.CharField(max_length=100)
-    number = models.CharField(max_length=20)
+    number = models.CharField(max_length=20,)
     owner = models.ForeignKey(
         USER_MODEL,
         related_name="accounts",

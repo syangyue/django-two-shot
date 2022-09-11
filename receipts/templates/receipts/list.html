@@ -13,7 +13,7 @@
              <th>Account</th>
             </thead>
            <tbody>
-             {% for item in receipt_list %}
+             {% for item in receipt_list.all %}
               <tr>
                  <td>{{ item.vendor }}</td>
                  <td>{{ item.total }}</td>
