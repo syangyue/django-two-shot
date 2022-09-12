@@ -1,17 +1,24 @@
 from django.urls import path
 
 
-from .views import (
+from receipts.views import (
     ReceiptListView,
     ReceiptCreateView,
+    ExpenseCategoryListView,
+    ExpenseCategoryCreateView,
     AccountListView,
-    ExpenseCategoryListView
+    AccountCreateView
 )
 
 urlpatterns = [
     path("", ReceiptListView.as_view(), name="home"),
-    path("create/", ReceiptCreateView.as_view(), name="receipt_create"),
+    path("create/", ReceiptCreateView.as_view(), name="create_receipt"),
     path("categories/", ExpenseCategoryListView.as_view(),
-         name="expense_category_list"),
-    path("accounts/", AccountListView.as_view(), name="account_list")
+         name="expence_list"),
+    path("accounts/", AccountListView.as_view(), name="account_list"),
+    path("categories/create/", ExpenseCategoryCreateView.as_view(),
+         name="create_category"),
+    path("accounts/create/", AccountCreateView.as_view(),
+         name="create_account"),
+
 ]

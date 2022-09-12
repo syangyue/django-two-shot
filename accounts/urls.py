@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
-from django.conf.urls import url
 from django.urls import path, include
 from django.contrib.auth import authenticate, login
-from django.views.generic.base import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 from .views import signup
 
 

@@ -37,6 +37,7 @@ class Receipt(models.Model):
         USER_MODEL,
         related_name="receipts",
         on_delete=models.CASCADE,
+        null=True
     )
     category = models.ForeignKey(
         "ExpenseCategory",
