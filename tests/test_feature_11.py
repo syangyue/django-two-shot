@@ -192,6 +192,7 @@ class FeatureTests(TestCase):
                 "account": account.id,
             },
         )
+        print("this is error:", response.headers.get("Location"))
         self.assertEqual(
             response.headers.get("Location"),
             reverse("home"),

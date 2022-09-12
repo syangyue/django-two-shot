@@ -6,7 +6,7 @@ USER_MODEL = settings.AUTH_USER_MODEL
 class ExpenseCategory(models.Model):
     name = models.CharField(max_length=50)
     owner = models.ForeignKey(
-        USER_MODEL,
+        settings.AUTH_USER_MODEL,
         related_name="categories",
         on_delete=models.CASCADE,
     )
@@ -19,7 +19,7 @@ class Account(models.Model):
     name = models.CharField(max_length=100)
     number = models.CharField(max_length=20,)
     owner = models.ForeignKey(
-        USER_MODEL,
+        settings.AUTH_USER_MODEL,
         related_name="accounts",
         on_delete=models.CASCADE,
     )
@@ -32,12 +32,11 @@ class Receipt(models.Model):
     vendor = models.CharField(max_length=200)
     total = models.DecimalField(decimal_places=3, max_digits=10)
     tax = models.DecimalField(decimal_places=3, max_digits=10)
-    date = models.DateField(null=False)
+    date = models.DateTimeField()
     purchaser = models.ForeignKey(
         USER_MODEL,
         related_name="receipts",
         on_delete=models.CASCADE,
-        null=True
     )
     category = models.ForeignKey(
         "ExpenseCategory",
@@ -46,7 +45,7 @@ class Receipt(models.Model):
         )
     account = models.ForeignKey(
         "Account",
+        null=True,
         related_name="receipts",
         on_delete=models.CASCADE,
-        null=True
     )

@@ -15,7 +15,7 @@
                         <a href="{% url 'create_category' %}">Create Category</a>
                     </li>
                     <li>
-                        <a href="{% url 'expence_list' %}">Categories List</a>
+                        <a href="{% url 'list_categories' %}">Categories List</a>
                     </li>
                     <li>
                         <a href="{% url 'home' %}">Receipts List</a>
@@ -24,7 +24,7 @@
                         <a href="{% url 'create_receipt' %}">Create Receipts</a>
                     </li>
                     <li>
-                        <a href="{% url 'account_list' %}">Accounts List</a>
+                        <a href="{% url 'list_accounts' %}">Accounts List</a>
                     </li>
                 {% else %}
                     <li>
@@ -38,12 +38,21 @@
         </nav>
     </header>
     <main>
-        <div>
-            <h1>Create Account</h1>
-            <form method="post">
-                {% csrf_token %} {{ form.as_p }}
-                <button type="submit">Create</button>
-            </form>
-        </div>
+        <h1>Expense Categories</h1>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Number of Receipts</th>
+            </thead>
+            <tbody>
+                {% for category in expensecategory_list.all %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.receipts.all|length }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Create Category</button>
     </main>
 {% endblock content %}

@@ -15,7 +15,7 @@
                         <a href="{% url 'create_category' %}">Create Category</a>
                     </li>
                     <li>
-                        <a href="{% url 'expence_list' %}">Categories List</a>
+                        <a href="{% url 'list_categories' %}">Categories List</a>
                     </li>
                     <li>
                         <a href="{% url 'home' %}">Receipts List</a>
@@ -24,7 +24,7 @@
                         <a href="{% url 'create_receipt' %}">Create Receipts</a>
                     </li>
                     <li>
-                        <a href="{% url 'account_list' %}">Accounts List</a>
+                        <a href="{% url 'list_accounts' %}">Accounts List</a>
                     </li>
                 {% else %}
                     <li>
@@ -39,7 +39,7 @@
     </header>
     <main>
         <div>
-            <h1>Create Receipt</h1>
+            <h1>Create Category</h1>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}

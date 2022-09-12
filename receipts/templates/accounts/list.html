@@ -15,7 +15,7 @@
                         <a href="{% url 'create_category' %}">Create Category</a>
                     </li>
                     <li>
-                        <a href="{% url 'expence_list' %}">Categories List</a>
+                        <a href="{% url 'list_categories' %}">Categories List</a>
                     </li>
                     <li>
                         <a href="{% url 'home' %}">Receipts List</a>
@@ -24,7 +24,7 @@
                         <a href="{% url 'create_receipt' %}">Create Receipts</a>
                     </li>
                     <li>
-                        <a href="{% url 'account_list' %}">Accounts List</a>
+                        <a href="{% url 'list_accounts' %}">Accounts List</a>
                     </li>
                 {% else %}
                     <li>
@@ -38,21 +38,22 @@
         </nav>
     </header>
     <main>
-        <h1>Expense Categories</h1>
+        <h1>Account List</h1>
         <table>
             <thead>
                 <th>Name</th>
-                <th>Number of Receipts</th>
+                <th>Number</th>
+                <th>Number of receipts</th>
             </thead>
             <tbody>
-                {% for category in expensecategory_list.all %}
+                {% for account in account_list.all %}
                     <tr>
-                        <td>{{ category.name }}</td>
-                        <td>{{ category.receipts.all|length }}</td>
+                        <td>{{ account.name }}</td>
+                        <td>{{ account.number }}</td>
+                        <td>{{ account.receipts.all|length }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Create Category</button>
     </main>
 {% endblock content %}

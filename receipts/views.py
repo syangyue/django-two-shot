@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 
 class ReceiptListView(LoginRequiredMixin, ListView):
     model = Receipt
-    template_name = "receipts/receipt_list.html"
+    template_name = "receipts/list.html"
 
     def get_queryset(self):
         return Receipt.objects.filter(purchaser=self.request.user)
@@ -15,17 +15,19 @@ class ReceiptListView(LoginRequiredMixin, ListView):
 
 class ReceiptCreateView(LoginRequiredMixin, CreateView):
     model = Receipt
-    template_name = "receipts/receipt_create.html"
+    template_name = "receipts/create.html"
     fields = ["vendor", "total", "tax", "date", "category", "account"]
 
     def form_valid(self, form):
-        form.instance.purchaser = self.request.user
-        return super().form_valid(form)
+        item = form.save(commit=False)
+        item.purchaser = self.request.user
+        item.save()
+        return redirect("home")
 
 
 class ExpenseCategoryListView(LoginRequiredMixin, ListView):
     model = ExpenseCategory
-    template_name = "receipts/expence_list.html"
+    template_name = "expense_categories/list.html"
 
     def get_queryset(self):
         return ExpenseCategory.objects.filter(owner=self.request.user)
@@ -33,28 +35,28 @@ class ExpenseCategoryListView(LoginRequiredMixin, ListView):
 
 class ExpenseCategoryCreateView(LoginRequiredMixin, CreateView):
     model = ExpenseCategory
-    template_name = "receipts/expence_create.html"
-    fields = ["name", "owner"]
-
-    def form_valid(self, form):
-        item = form.save(commit=False)
-        item.category = self.request.user
-        item.save()
-        return redirect("receipts/expence_list")
-
-
-class AccountListView(LoginRequiredMixin, ListView):
-    model = Account
-    template_name = "receipts/account_list.html"
-
-
-class AccountCreateView(LoginRequiredMixin, CreateView):
-    model = Account
-    template_name = "receipts/account_create.html"
-    fields = ["name", "number", "owner"]
+    template_name = "expense_categories/create.html"
+    fields = ["name"]
 
     def form_valid(self, form):
         item = form.save(commit=False)
         item.owner = self.request.user
         item.save()
-        return redirect("/receipts/accounts/")
+        return redirect("list_categories")
+
+
+class AccountListView(LoginRequiredMixin, ListView):
+    model = Account
+    template_name = "accounts/list.html"
+
+
+class AccountCreateView(LoginRequiredMixin, CreateView):
+    model = Account
+    template_name = "accounts/create.html"
+    fields = ["name", "number"]
+
+    def form_valid(self, form):
+        item = form.save(commit=False)
+        item.owner = self.request.user
+        item.save()
+        return redirect("list_accounts")
