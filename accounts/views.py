@@ -14,7 +14,7 @@ def signup(request):
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password1')
-            user = User.objects.create(
+            user = User.objects.create_user(
                 username=username,
                 password=password,
             )
@@ -28,5 +28,3 @@ def signup(request):
             'form': form,
          }
     return render(request, "registration/signup.html", context)
-
-

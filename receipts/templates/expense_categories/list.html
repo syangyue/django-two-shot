@@ -1,58 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <header>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'logout' %}">Logout</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'create_account' %}">Create Account</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'create_category' %}">Create Category</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'list_categories' %}">Categories List</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'home' %}">Receipts List</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'create_receipt' %}">Create Receipts</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'list_accounts' %}">Accounts List</a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a href="{% url 'login' %}">login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'signup' %}">Sign Up</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Expense Categories</h1>
-        <table>
-            <thead>
-                <th>Name</th>
-                <th>Number of Receipts</th>
-            </thead>
-            <tbody>
-                {% for category in expensecategory_list.all %}
-                    <tr>
-                        <td>{{ category.name }}</td>
-                        <td>{{ category.receipts.all|length }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <button type="submit">Create Category</button>
-    </main>
+  <h1>Expense Categories</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of receipts</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in expensecategory_list %}
+        <tr>
+          <td>{{ category.name }}</td>
+          <td>{{ category.receipts.all|length }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock content %}
+
+

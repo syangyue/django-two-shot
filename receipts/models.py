@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-USER_MODEL = settings.AUTH_USER_MODEL
 
 
 class ExpenseCategory(models.Model):
@@ -17,7 +16,7 @@ class ExpenseCategory(models.Model):
 
 class Account(models.Model):
     name = models.CharField(max_length=100)
-    number = models.CharField(max_length=20,)
+    number = models.CharField(max_length=20)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="accounts",
@@ -34,7 +33,7 @@ class Receipt(models.Model):
     tax = models.DecimalField(decimal_places=3, max_digits=10)
     date = models.DateTimeField()
     purchaser = models.ForeignKey(
-        USER_MODEL,
+        settings.AUTH_USER_MODEL,
         related_name="receipts",
         on_delete=models.CASCADE,
     )
